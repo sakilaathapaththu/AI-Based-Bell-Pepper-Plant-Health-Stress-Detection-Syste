@@ -10,3 +10,8 @@ environmental-stress-prediction/model/*.json
 # **/Dataset/
 **/dataset_all
 **/venv/
+
+rgb-stress-detection/dataset/
+rgb-stress-detection/model/*.keras
+rgb-stress-detection/splits/
+rgb-stress-detection/reports/
