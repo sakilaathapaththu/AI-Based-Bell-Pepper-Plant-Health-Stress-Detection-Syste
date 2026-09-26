@@ -1,0 +1,11 @@
+stress_class,meaning,main_environmental_basis,status
+No Significant Environmental Stress,No dominant adverse environmental signal,All selected factors broadly compatible with prototype reference context,Derived prototype class
+Heat Stress,High air-temperature driven environmental stress,Air temperature above stage/time reference; humidity may amplify risk,Derived prototype class
+Cold Stress,Low air-temperature driven environmental stress,Air temperature below stage/time reference,Derived prototype class
+Low Humidity Stress,Dry-air / high atmospheric-demand context,Relative humidity below reference context,Derived prototype class
+High Humidity Stress,Excessively humid greenhouse-air context,Relative humidity above reference context,Derived prototype class
+High Light Stress,Excessive daytime light context,Daytime light above prototype reference band,Lux rule is prototype only; PPFD is preferred scientifically
+Low Light Stress,Insufficient daytime light context,Daytime light below prototype reference band,Night-time low light must not be treated as stress
+Root-Zone Heat Stress,High root-zone / soil-temperature context,Soil temperature above reference band,Derived prototype class
+Root-Zone Cold Stress,Low root-zone / soil-temperature context,Soil temperature below reference band,Derived prototype class
+Combined Environmental Stress,Multiple unfavorable environmental factors occur together,At least two substantial prototype stress signals,Derived prototype class

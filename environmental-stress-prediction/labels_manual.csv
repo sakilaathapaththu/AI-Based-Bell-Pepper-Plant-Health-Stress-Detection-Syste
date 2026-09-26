@@ -1,0 +1,14 @@
+type,name,min_score,max_score,meaning,status
+risk_level,Low,0,34.9,Prototype risk band only; not a clinically/agronomically validated universal threshold,Derived prototype band
+risk_level,Moderate,35,69.9,Prototype risk band only; validate against final target-generation method,Derived prototype band
+risk_level,High,70,100,Prototype risk band only; validate against final target-generation method,Derived prototype band
+stress_class,No Significant Environmental Stress,,,No dominant adverse environmental signal,Derived prototype class
+stress_class,Heat Stress,,,High air-temperature driven environmental stress,Derived prototype class
+stress_class,Cold Stress,,,Low air-temperature driven environmental stress,Derived prototype class
+stress_class,Low Humidity Stress,,,Dry-air / high atmospheric-demand context,Derived prototype class
+stress_class,High Humidity Stress,,,Excessively humid greenhouse-air context,Derived prototype class
+stress_class,High Light Stress,,,Excessive daytime light context,Lux rule is prototype only; PPFD is preferred scientifically
+stress_class,Low Light Stress,,,Insufficient daytime light context,Night-time low light must not be treated as stress
+stress_class,Root-Zone Heat Stress,,,High root-zone / soil-temperature context,Derived prototype class
+stress_class,Root-Zone Cold Stress,,,Low root-zone / soil-temperature context,Derived prototype class
+stress_class,Combined Environmental Stress,,,Multiple unfavorable environmental factors occur together,Derived prototype class

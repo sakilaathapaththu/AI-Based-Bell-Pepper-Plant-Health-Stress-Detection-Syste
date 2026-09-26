@@ -1,0 +1,7 @@
+timestamp,air_temperature_c,relative_humidity_pct,light_intensity_lux,soil_temperature_c,growth_stage,simulation_note
+2025-03-09 02:30:00,20.08,79.39,0.0,21.9,Fruiting,Synthetic scenario selected from prototype data; target context=Root-Zone Cold Stress
+2025-03-09 03:00:00,19.95,81.12,0.0,21.67,Fruiting,Synthetic scenario selected from prototype data; target context=Root-Zone Cold Stress
+2025-03-28 02:30:00,20.25,72.01,0.0,21.81,Fruiting,Synthetic scenario selected from prototype data; target context=Root-Zone Cold Stress
+2025-03-28 03:00:00,20.12,75.4,0.0,20.35,Fruiting,Synthetic scenario selected from prototype data; target context=Root-Zone Cold Stress
+2025-03-28 03:30:00,20.0,74.37,0.0,18.63,Fruiting,Synthetic scenario selected from prototype data; target context=Root-Zone Cold Stress
+2025-03-28 04:00:00,19.87,75.38,0.0,16.52,Fruiting,Synthetic scenario selected from prototype data; target context=Root-Zone Cold Stress

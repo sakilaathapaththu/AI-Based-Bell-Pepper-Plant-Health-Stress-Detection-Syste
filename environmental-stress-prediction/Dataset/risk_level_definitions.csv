@@ -1,0 +1,4 @@
+risk_level,min_score,max_score,validation_note
+Low,0,34.9,Prototype risk band only; not a clinically/agronomically validated universal threshold
+Moderate,35,69.9,Prototype risk band only; validate against final target-generation method
+High,70,100,Prototype risk band only; validate against final target-generation method

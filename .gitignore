@@ -1,1 +1,12 @@
 agent.md
+docs/agent.md
+docs/*.md
+
+__pycache__/
+*.pyc
+environmental-stress-prediction/model/*.pkl
+environmental-stress-prediction/model/*.json
+# dataset/
+# **/Dataset/
+**/dataset_all
+**/venv/

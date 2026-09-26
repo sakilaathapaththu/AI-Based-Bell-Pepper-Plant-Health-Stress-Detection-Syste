@@ -1,0 +1,18 @@
+{
+  "stress_type": "Heat Stress",
+  "risk_30m": {
+    "level": "Moderate",
+    "score": 62.0
+  },
+  "risk_60m": {
+    "level": "High",
+    "score": 81.0
+  },
+  "main_contributing_factors": [
+    "High Air Temperature",
+    "Low Relative Humidity"
+  ],
+  "explanation": "Current environmental conditions indicate elevated heat-related stress risk.",
+  "growth_stage": "Flowering",
+  "data_source_mode": "Virtual Sensor / Dataset Replay"
+}

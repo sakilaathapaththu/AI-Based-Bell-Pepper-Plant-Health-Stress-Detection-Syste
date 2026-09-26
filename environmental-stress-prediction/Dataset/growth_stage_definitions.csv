@@ -1,0 +1,6 @@
+growth_stage,description,runtime_role
+Seedling,Young plant / establishment stage,User-selected contextual feature
+Vegetative,Active leaf and stem growth stage,User-selected contextual feature
+Flowering,Flowering and reproductive transition stage,User-selected contextual feature
+Fruiting,Fruit development stage,User-selected contextual feature
+Harvesting,Mature production / harvesting stage,User-selected contextual feature

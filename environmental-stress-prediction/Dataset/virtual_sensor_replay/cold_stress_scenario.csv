@@ -1,0 +1,16 @@
+timestamp,air_temperature_c,relative_humidity_pct,light_intensity_lux,soil_temperature_c,growth_stage,simulation_note
+2025-03-08 03:00:00,19.35,76.52,0.0,21.76,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-08 03:30:00,18.65,75.05,0.0,21.68,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-08 04:00:00,16.66,78.49,0.0,21.6,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-08 04:30:00,14.93,74.87,0.0,21.48,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-24 03:30:00,19.64,83.43,0.0,21.95,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-24 04:00:00,17.8,84.16,0.0,21.94,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-24 04:30:00,15.69,81.64,0.0,21.92,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-31 04:30:00,20.42,72.54,0.0,21.73,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-03-31 06:00:00,15.32,73.59,0.0,21.69,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-04-06 04:00:00,18.81,78.99,0.0,21.72,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-04-06 04:30:00,17.6,81.81,0.0,21.66,Fruiting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-04-15 04:00:00,18.23,83.23,0.0,21.63,Harvesting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-04-15 04:30:00,16.76,84.03,0.0,21.51,Harvesting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-04-20 03:30:00,19.28,78.02,0.0,22.17,Harvesting,Synthetic scenario selected from prototype data; target context=Cold Stress
+2025-04-20 04:00:00,17.67,75.69,0.0,22.12,Harvesting,Synthetic scenario selected from prototype data; target context=Cold Stress

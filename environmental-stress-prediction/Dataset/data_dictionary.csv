@@ -1,0 +1,16 @@
+column,type_or_unit,meaning
+timestamp,datetime,Current environmental observation time; aligns current row to future 30/60-minute targets.
+hour_decimal,numeric,Hour derived from timestamp for model context.
+growth_stage,categorical,Bell Pepper growth stage selected by user.
+air_temperature_c,numeric °C,Greenhouse air temperature.
+relative_humidity_pct,numeric %,Greenhouse relative humidity.
+light_intensity_lux,numeric lux,Visible-light input used by current app scope; scientific thresholds should ideally use PPFD.
+soil_temperature_c,numeric °C,Soil/root-zone temperature.
+stress_type_30m,categorical target,Derived prototype environmental stress class at t+30.
+risk_score_30m,0-100 target,Derived prototype risk score at t+30.
+risk_level_30m,Low/Moderate/High target,Derived prototype risk band at t+30.
+stress_type_60m,categorical target,Derived prototype environmental stress class at t+60.
+risk_score_60m,0-100 target,Derived prototype risk score at t+60.
+risk_level_60m,Low/Moderate/High target,Derived prototype risk band at t+60.
+split,Train/Validation/Test,Time-ordered model-development split.
+label_origin,text,Explicit provenance warning for derived labels.
