@@ -1,0 +1,19 @@
+{
+  "model_version": "thermal-bellpepper-stress-v1",
+  "training_date": "2026-09-29",
+  "training_mode": "flat",
+  "flat_class_names": [
+    "Healthy",
+    "Heat_Stress",
+    "Nutrient_Stress",
+    "Water_Stress"
+  ],
+  "healthy_class_name": "Healthy",
+  "image_size": [
+    240,
+    320
+  ],
+  "backbone": "efficientnetb0",
+  "thermal_metrics_basis": "pixel_intensity_proxy",
+  "notes": "Trained on pseudo-color visual thermal images with no radiometric calibration metadata - see dataset_all/Thermal_Model_Training_Plan_and_Dataset_Analysis.txt Section 2 before reporting any thermal_metrics as calibrated degrees Celsius. Dataset authenticity (real camera vs simulated) is unconfirmed - see Section 1."
+}

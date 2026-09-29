@@ -1,0 +1,103 @@
+{
+  "model_name": "random_forest",
+  "class_names": [
+    "Healthy",
+    "Heat_Stress",
+    "Nutrient_Stress",
+    "Water_Stress"
+  ],
+  "feature_columns": [
+    "proxy_mean",
+    "proxy_min",
+    "proxy_max",
+    "proxy_range",
+    "proxy_std",
+    "proxy_skewness",
+    "foreground_pixel_ratio",
+    "whole_frame_mean",
+    "whole_frame_std",
+    "background_mean",
+    "foreground_background_diff"
+  ],
+  "thermal_metrics_basis": "pixel_intensity_proxy",
+  "holdout_metrics": {
+    "random_forest": {
+      "classification_report": {
+        "Healthy": {
+          "precision": 0.8947368421052632,
+          "recall": 0.9444444444444444,
+          "f1-score": 0.918918918918919,
+          "support": 18.0
+        },
+        "Heat_Stress": {
+          "precision": 0.65,
+          "recall": 0.7222222222222222,
+          "f1-score": 0.6842105263157895,
+          "support": 18.0
+        },
+        "Nutrient_Stress": {
+          "precision": 0.5555555555555556,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.5555555555555556,
+          "support": 18.0
+        },
+        "Water_Stress": {
+          "precision": 0.4666666666666667,
+          "recall": 0.3888888888888889,
+          "f1-score": 0.42424242424242425,
+          "support": 18.0
+        },
+        "accuracy": 0.6527777777777778,
+        "macro avg": {
+          "precision": 0.6417397660818713,
+          "recall": 0.6527777777777778,
+          "f1-score": 0.6457318562581721,
+          "support": 72.0
+        },
+        "weighted avg": {
+          "precision": 0.6417397660818713,
+          "recall": 0.6527777777777778,
+          "f1-score": 0.6457318562581721,
+          "support": 72.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          17,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          13,
+          2,
+          3
+        ],
+        [
+          2,
+          2,
+          10,
+          4
+        ],
+        [
+          0,
+          5,
+          6,
+          7
+        ]
+      ]
+    }
+  },
+  "kfold_metrics": {
+    "fold_macro_f1": [
+      0.6499802819678595,
+      0.5813450292397662,
+      0.6440018315018314,
+      0.5914145887487565,
+      0.6671836007130125
+    ],
+    "mean_macro_f1": 0.6267850664342453,
+    "std_macro_f1": 0.03400689420353264
+  }
+}
