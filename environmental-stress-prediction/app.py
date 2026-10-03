@@ -9,9 +9,12 @@ and serves two endpoints:
   suitable ranges (Section: "Check Current Environment" in the UI flow).
   Gives High/Low/Normal status and adjustment direction only - never an
   exact recovery action (that belongs to the Recovery DSS).
-- POST /predict            - reuses current_environment + historical_context
-  to forecast stress_type / risk_level / risk_score at +30min and +60min,
-  matching Dataset/model_output_format.json.
+- POST /predict            - takes only the single current reading (same
+  shape as /check-environment) and forecasts stress_type / risk_level /
+  risk_score at +30min and +60min, matching Dataset/model_output_format.json.
+  Prior readings needed for lag/rolling features are auto-filled from the
+  Virtual Sensor / Dataset Replay (replay_lookup.py) - the caller never
+  re-enters or resends historical values.
 
 Uses the exact same feature-engineering functions as train.py (agent.md
 Section 27: never recreate preprocessing manually inside the API).
@@ -37,6 +40,7 @@ from environmental_reference import (
     load_reference_ranges,
     main_contributing_factors,
 )
+from replay_lookup import get_historical_context
 from train import (
     GROWTH_STAGE_COL,
     MODEL_DIR,
@@ -76,10 +80,19 @@ class CurrentEnvironment(BaseModel):
 
 
 class PredictRequest(BaseModel):
-    current_environment: dict[str, float] = Field(..., description="air_temperature_c, relative_humidity_pct, light_intensity_lux, soil_temperature_c")
+    timestamp: str
     growth_stage: str
-    historical_context: list[HistoricalReading] = Field(
-        ..., description="Prior readings, chronologically sorted, used to compute lag/rolling/trend features"
+    air_temperature_c: float
+    relative_humidity_pct: float
+    light_intensity_lux: float
+    soil_temperature_c: float
+    historical_context: list[HistoricalReading] | None = Field(
+        default=None,
+        description=(
+            "Optional explicit prior readings. Normally omitted - the user "
+            "never re-enters values; history is auto-filled from the "
+            "Virtual Sensor / Dataset Replay by growth stage + time-of-day."
+        ),
     )
 
 
@@ -159,19 +172,30 @@ def predict(request: PredictRequest) -> dict:
             detail="Model artifacts not found under model/. Run train.py first.",
         )
 
-    missing = [f for f in SENSOR_COLUMNS if f not in request.current_environment]
-    if missing:
-        raise HTTPException(status_code=422, detail=f"Missing required environment fields: {missing}")
-    if not request.historical_context:
-        raise HTTPException(status_code=422, detail="historical_context is required to compute lag/rolling features")
+    current_environment = {
+        "air_temperature_c": request.air_temperature_c,
+        "relative_humidity_pct": request.relative_humidity_pct,
+        "light_intensity_lux": request.light_intensity_lux,
+        "soil_temperature_c": request.soil_temperature_c,
+    }
+    now_timestamp = pd.to_datetime(request.timestamp)
 
-    history_df = pd.DataFrame([r.model_dump() for r in request.historical_context])
+    if request.historical_context:
+        history_records = [r.model_dump() for r in request.historical_context]
+    else:
+        # User never re-enters values - auto-fill prior readings from the
+        # Virtual Sensor / Dataset Replay, matched by growth stage + time-of-day.
+        try:
+            history_records = get_historical_context(
+                request.growth_stage, now_timestamp.hour, now_timestamp.minute
+            )
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    history_df = pd.DataFrame(history_records)
     history_df[TIMESTAMP_COL] = pd.to_datetime(history_df[TIMESTAMP_COL])
 
-    now_row = {**request.current_environment, GROWTH_STAGE_COL: request.growth_stage}
-    now_timestamp = history_df[TIMESTAMP_COL].max() + pd.Timedelta(minutes=30)
-    now_row[TIMESTAMP_COL] = now_timestamp
-
+    now_row = {**current_environment, GROWTH_STAGE_COL: request.growth_stage, TIMESTAMP_COL: now_timestamp}
     full_history = pd.concat([history_df, pd.DataFrame([now_row])], ignore_index=True)
 
     engineered, _ = build_features(full_history, fitted_growth_stages=Artifacts.encoders[GROWTH_STAGE_COL])
@@ -205,7 +229,7 @@ def predict(request: PredictRequest) -> dict:
     # environmental signals feeding the forecast, shown to the user as
     # "Main Contributing Factors".
     environment_status = evaluate_current_environment(
-        request.current_environment, request.growth_stage, now_timestamp.hour, Artifacts.reference_ranges
+        current_environment, request.growth_stage, now_timestamp.hour, Artifacts.reference_ranges
     )
     contributing_factors = main_contributing_factors(environment_status)
 
@@ -220,7 +244,7 @@ def predict(request: PredictRequest) -> dict:
     return {
         "prediction_timestamp": now_timestamp.isoformat(),
         "growth_stage": request.growth_stage,
-        "current_environment": request.current_environment,
+        "current_environment": current_environment,
         "stress_type": predicted_stress_type,
         "risk_30m": {"level": level_30, "score": round(score_30, 1)},
         "risk_60m": {"level": level_60, "score": round(score_60, 1)},
@@ -234,7 +258,7 @@ def predict(request: PredictRequest) -> dict:
             "risk_30m": {"level": level_30, "score": round(score_30, 1)},
             "risk_60m": {"level": level_60, "score": round(score_60, 1)},
             "growth_stage": request.growth_stage,
-            "current_environment": request.current_environment,
+            "current_environment": current_environment,
             "main_contributing_factors": contributing_factors,
         },
     }
