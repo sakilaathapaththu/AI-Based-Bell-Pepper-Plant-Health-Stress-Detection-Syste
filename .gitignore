@@ -4,6 +4,7 @@ docs/*.md
 
 __pycache__/
 *.pyc
+**/.env
 environmental-stress-prediction/model/*.pkl
 environmental-stress-prediction/model/*.json
 # dataset/
