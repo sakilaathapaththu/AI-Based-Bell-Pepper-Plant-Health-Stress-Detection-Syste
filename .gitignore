@@ -4,9 +4,22 @@ docs/*.md
 
 __pycache__/
 *.pyc
+**/.env
 environmental-stress-prediction/model/*.pkl
 environmental-stress-prediction/model/*.json
 # dataset/
 # **/Dataset/
 **/dataset_all
 **/venv/
+
+rgb-stress-detection/dataset/
+rgb-stress-detection/model/*.keras
+rgb-stress-detection/splits/
+rgb-stress-detection/reports/
+
+Thermal-stress-evidence-identify/dataset/
+Thermal-stress-evidence-identify/model/*.keras
+Thermal-stress-evidence-identify/model/*.pkl
+Thermal-stress-evidence-identify/splits/
+Thermal-stress-evidence-identify/reports/
+Thermal-stress-evidence-identify/features/
