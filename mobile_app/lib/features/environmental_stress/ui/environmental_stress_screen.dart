@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:bell_pepper_app/constants/app_colors.dart';
 import 'package:bell_pepper_app/constants/app_text_styles.dart';
+import 'package:bell_pepper_app/features/environmental_stress/ui/check_current_environment_screen.dart';
 import 'package:bell_pepper_app/features/environmental_stress/ui/widgets/environmental_action_card.dart';
 
 /// Content for the Environmental Stress Prediction module: a status banner
 /// plus a 2x2 grid of actions (check readings, predict risk, saved results,
 /// help). Embedded inside the Home tab (keeping the shared top bar and
 /// bottom nav visible) rather than pushed as a separate full-screen route;
-/// [onBack] returns the tab to the dashboard view. Real data/prediction
-/// wiring lands here incrementally — for now each action just acknowledges
-/// the tap.
-class EnvironmentalStressScreen extends StatelessWidget {
+/// [onBack] returns the tab to the dashboard view. "Check Current
+/// Environment" swaps in its own form the same way; the other actions are
+/// still placeholders pending real data/prediction wiring.
+class EnvironmentalStressScreen extends StatefulWidget {
   const EnvironmentalStressScreen({super.key, required this.onBack});
 
   final VoidCallback onBack;
 
   @override
+  State<EnvironmentalStressScreen> createState() => _EnvironmentalStressScreenState();
+}
+
+class _EnvironmentalStressScreenState extends State<EnvironmentalStressScreen> {
+  bool _showCheckEnvironment = false;
+
+  @override
   Widget build(BuildContext context) {
+    if (_showCheckEnvironment) {
+      return CheckCurrentEnvironmentScreen(
+        onBack: () => setState(() => _showCheckEnvironment = false),
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _BackButton(onTap: onBack),
+        _BackButton(onTap: widget.onBack),
         const SizedBox(height: 12),
         RichText(
           text: const TextSpan(
@@ -56,7 +70,7 @@ class EnvironmentalStressScreen extends StatelessWidget {
                   badge: 'CE',
                   title: 'Check Current\nEnvironment',
                   subtitle: 'Compare readings with suitable ranges.',
-                  onTap: () => _notifyComingSoon(context, 'Check Current Environment'),
+                  onTap: () => setState(() => _showCheckEnvironment = true),
                 ),
               ),
               const SizedBox(width: 14),
