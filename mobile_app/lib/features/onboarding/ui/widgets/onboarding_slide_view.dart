@@ -6,9 +6,10 @@ import 'package:bell_pepper_app/features/onboarding/ui/widgets/onboarding_featur
 /// Content (headline, subtitle, feature cards) for one onboarding page.
 ///
 /// Centered vertically within the available height so leftover space on
-/// tall screens is split evenly above/below the content instead of
-/// collecting as one large gap below the cards. Still scrolls if the
-/// content is taller than the viewport (e.g. small devices with wrapped text).
+/// tall screens/short slides is split evenly above and below the content,
+/// instead of collecting as one large gap under the cards. Still scrolls if
+/// the content is taller than the viewport (e.g. small devices with wrapped
+/// text).
 class OnboardingSlideView extends StatelessWidget {
   const OnboardingSlideView({super.key, required this.slide});
 

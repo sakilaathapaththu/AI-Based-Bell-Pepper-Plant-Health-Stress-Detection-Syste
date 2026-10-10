@@ -16,15 +16,15 @@ class BrandHeader extends StatelessWidget {
     return Row(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
           child: Image.asset(
             AppAssets.pepperLogo,
-            width: 36,
-            height: 36,
+            width: 48,
+            height: 48,
             fit: BoxFit.cover,
           ),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

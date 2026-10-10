@@ -32,19 +32,19 @@ class AppTextStyles {
   );
 
   static const TextStyle brandWordmark = TextStyle(
-    fontSize: 17,
+    fontSize: 21,
     fontWeight: FontWeight.w800,
     color: AppColors.titleDark,
   );
 
   static const TextStyle brandWordmarkAccent = TextStyle(
-    fontSize: 17,
+    fontSize: 21,
     fontWeight: FontWeight.w800,
     color: AppColors.primaryGreen,
   );
 
   static const TextStyle brandSubtitle = TextStyle(
-    fontSize: 11,
+    fontSize: 13,
     fontWeight: FontWeight.w400,
     color: AppColors.subtitleGrey,
   );

@@ -34,4 +34,17 @@ class AppStrings {
   static const String emailInvalid = 'Enter a valid email address';
   static const String passwordRequired = 'Enter your password';
   static const String passwordTooShort = 'Password must be at least 6 characters';
+
+  static const String createYourAccount = 'Create your account';
+  static const String signUpSubtitle = 'Join PepperCare AI to start monitoring your greenhouse.';
+  static const String fullNameLabel = 'Full Name';
+  static const String fullNameHint = 'Enter your full name';
+  static const String confirmPasswordLabel = 'Confirm Password';
+  static const String confirmPasswordHint = '••••••••';
+  static const String signUp = 'Sign Up';
+  static const String logInPrompt = 'Already have an account?  ';
+
+  static const String fullNameRequired = 'Enter your full name';
+  static const String confirmPasswordRequired = 'Confirm your password';
+  static const String passwordMismatch = 'Passwords do not match';
 }

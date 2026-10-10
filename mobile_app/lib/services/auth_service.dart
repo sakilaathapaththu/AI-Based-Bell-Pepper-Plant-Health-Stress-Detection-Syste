@@ -22,6 +22,19 @@ class AuthService {
     );
   }
 
+  Future<UserCredential> registerWithEmail({
+    required String fullName,
+    required String email,
+    required String password,
+  }) async {
+    final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email.trim(),
+      password: password,
+    );
+    await credential.user?.updateDisplayName(fullName.trim());
+    return credential;
+  }
+
   /// Lets the "Continue as Demo User" button work without an account.
   /// Requires Anonymous sign-in to be enabled in the Firebase console.
   Future<UserCredential> signInAsDemoUser() {

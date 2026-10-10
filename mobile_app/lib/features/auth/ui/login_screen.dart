@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:bell_pepper_app/constants/app_colors.dart';
 import 'package:bell_pepper_app/constants/app_strings.dart';
 import 'package:bell_pepper_app/constants/app_text_styles.dart';
+import 'package:bell_pepper_app/features/auth/ui/register_screen.dart';
 import 'package:bell_pepper_app/features/home/ui/home_screen.dart';
 import 'package:bell_pepper_app/services/auth_service.dart';
 import 'package:bell_pepper_app/ui/widgets/app_text_field.dart';
 import 'package:bell_pepper_app/ui/widgets/brand_header.dart';
+import 'package:bell_pepper_app/ui/widgets/glow_circle.dart';
 import 'package:bell_pepper_app/ui/widgets/primary_button.dart';
-import 'package:bell_pepper_app/ui/widgets/secondary_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,9 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authService = AuthService();
 
   bool _isSigningIn = false;
-  bool _isContinuingAsDemo = false;
 
-  bool get _isBusy => _isSigningIn || _isContinuingAsDemo;
+  bool get _isBusy => _isSigningIn;
 
   @override
   void dispose() {
@@ -40,6 +40,12 @@ class _LoginScreenState extends State<LoginScreen> {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (_) => const HomeScreen()),
       (route) => false,
+    );
+  }
+
+  void _goToRegister() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const RegisterScreen()),
     );
   }
 
@@ -67,113 +73,151 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  Future<void> _handleDemoUser() async {
-    setState(() => _isContinuingAsDemo = true);
-    try {
-      await _authService.signInAsDemoUser();
-      _goToHome();
-    } on FirebaseAuthException catch (e) {
-      _showError(e.message ?? 'Could not start a demo session.');
-    } finally {
-      if (mounted) setState(() => _isContinuingAsDemo = false);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const BrandHeader(),
-                const SizedBox(height: 36),
-                const Text(AppStrings.welcomeBack, style: AppTextStyles.screenTitle),
-                const SizedBox(height: 8),
-                const Text(
-                  AppStrings.signInSubtitle,
-                  style: AppTextStyles.screenSubtitle,
-                ),
-                const SizedBox(height: 28),
-                AppTextField(
-                  label: AppStrings.emailLabel,
-                  hint: AppStrings.emailHint,
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  validator: _validateEmail,
-                ),
-                const SizedBox(height: 18),
-                AppTextField(
-                  label: AppStrings.passwordLabel,
-                  hint: AppStrings.passwordHint,
-                  controller: _passwordController,
-                  obscureText: true,
-                  textInputAction: TextInputAction.done,
-                  validator: _validatePassword,
-                ),
-                const SizedBox(height: 10),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    // TODO: navigate to password reset once that flow exists.
-                    onPressed: _isBusy ? null : () {},
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(0, 0),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    child: const Text(
-                      AppStrings.forgotPassword,
-                      style: AppTextStyles.linkLabel,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                PrimaryButton(
-                  label: AppStrings.logIn,
-                  isLoading: _isSigningIn,
-                  onPressed: _isBusy ? null : _handleLogIn,
-                ),
-                const SizedBox(height: 18),
-                const Center(
-                  child: Text(AppStrings.or, style: AppTextStyles.dividerLabel),
-                ),
-                const SizedBox(height: 18),
-                SecondaryButton(
-                  label: AppStrings.continueAsDemoUser,
-                  isLoading: _isContinuingAsDemo,
-                  onPressed: _isBusy ? null : _handleDemoUser,
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        AppStrings.signUpPrompt,
-                        style: AppTextStyles.loginPrompt,
-                      ),
-                      GestureDetector(
-                        // TODO: navigate to account creation once that screen exists.
-                        onTap: _isBusy ? null : () {},
-                        child: const Text(
-                          AppStrings.createAccount,
-                          style: AppTextStyles.loginLink,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+      body: Stack(
+        children: [
+          // Soft decorative glow so the screen reads as branded, not blank.
+          Positioned(
+            top: -90,
+            right: -70,
+            child: GlowCircle(
+              size: 240,
+              colors: [
+                AppColors.lightGreen.withValues(alpha: 0.45),
+                AppColors.primaryGreen.withValues(alpha: 0.05),
               ],
             ),
           ),
-        ),
+          Positioned(
+            bottom: -110,
+            left: -90,
+            child: GlowCircle(
+              size: 260,
+              colors: [
+                AppColors.primaryGreen.withValues(alpha: 0.12),
+                AppColors.lightGreen.withValues(alpha: 0.0),
+              ],
+            ),
+          ),
+          SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    child: Center(
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const BrandHeader(),
+                            const SizedBox(height: 32),
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
+                              decoration: BoxDecoration(
+                                color: AppColors.cardBackground,
+                                borderRadius: BorderRadius.circular(24),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.primaryGreen.withValues(alpha: 0.1),
+                                    blurRadius: 24,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    AppStrings.welcomeBack,
+                                    style: AppTextStyles.screenTitle,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  const Text(
+                                    AppStrings.signInSubtitle,
+                                    style: AppTextStyles.screenSubtitle,
+                                  ),
+                                  const SizedBox(height: 26),
+                                  AppTextField(
+                                    label: AppStrings.emailLabel,
+                                    hint: AppStrings.emailHint,
+                                    controller: _emailController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                    validator: _validateEmail,
+                                    prefixIcon: Icons.mail_outline,
+                                  ),
+                                  const SizedBox(height: 18),
+                                  AppTextField(
+                                    label: AppStrings.passwordLabel,
+                                    hint: AppStrings.passwordHint,
+                                    controller: _passwordController,
+                                    obscureText: true,
+                                    textInputAction: TextInputAction.done,
+                                    validator: _validatePassword,
+                                    prefixIcon: Icons.lock_outline,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      // TODO: navigate to password reset once that flow exists.
+                                      onPressed: _isBusy ? null : () {},
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        minimumSize: const Size(0, 0),
+                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      ),
+                                      child: const Text(
+                                        AppStrings.forgotPassword,
+                                        style: AppTextStyles.linkLabel,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 22),
+                                  PrimaryButton(
+                                    label: AppStrings.logIn,
+                                    isLoading: _isSigningIn,
+                                    onPressed: _isBusy ? null : _handleLogIn,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            Center(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    AppStrings.signUpPrompt,
+                                    style: AppTextStyles.loginPrompt,
+                                  ),
+                                  GestureDetector(
+                                    onTap: _isBusy ? null : _goToRegister,
+                                    child: const Text(
+                                      AppStrings.createAccount,
+                                      style: AppTextStyles.loginLink,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -31,9 +31,16 @@ class OnboardingFeatureCard extends StatelessWidget {
             width: 44,
             height: 44,
             alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              color: AppColors.featureIconBackground,
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppColors.featureIconBackground,
+                  AppColors.lightGreen.withValues(alpha: 0.6),
+                ],
+              ),
             ),
             child: Text(feature.badge, style: AppTextStyles.featureBadge),
           ),
