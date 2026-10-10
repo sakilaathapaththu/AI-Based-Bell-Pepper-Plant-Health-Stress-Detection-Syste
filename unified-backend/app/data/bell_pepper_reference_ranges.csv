@@ -1,0 +1,6 @@
+growth_stage,day_air_temp_min_c,day_air_temp_max_c,night_air_temp_min_c,night_air_temp_max_c,rh_min_pct,rh_max_pct,soil_temp_min_c,soil_temp_max_c,day_light_min_lux_prototype,day_light_max_lux_prototype,validation_status
+Seedling,21,25,18,22,65,80,20,24,8000,30000,Literature-informed prototype; expert validation required
+Vegetative,21,28,17,22,60,80,20,25,12000,45000,Literature-informed prototype; expert validation required
+Flowering,21,27,18,22,60,75,20,25,15000,50000,Literature-informed prototype; expert validation required
+Fruiting,21,28,18,22,60,80,20,25,15000,55000,Literature-informed prototype; expert validation required
+Harvesting,20,28,17,22,60,80,19,25,10000,50000,Literature-informed prototype; expert validation required

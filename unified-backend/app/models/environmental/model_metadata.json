@@ -1,0 +1,1450 @@
+{
+  "model_version": "environmental-stress-v2",
+  "training_date": "2026-09-26",
+  "features": [
+    "hour_decimal",
+    "air_temperature_c",
+    "relative_humidity_pct",
+    "light_intensity_lux",
+    "soil_temperature_c",
+    "air_temperature_c_lag_1",
+    "air_temperature_c_lag_2",
+    "air_temperature_c_lag_3",
+    "relative_humidity_pct_lag_1",
+    "relative_humidity_pct_lag_2",
+    "relative_humidity_pct_lag_3",
+    "light_intensity_lux_lag_1",
+    "light_intensity_lux_lag_2",
+    "light_intensity_lux_lag_3",
+    "soil_temperature_c_lag_1",
+    "soil_temperature_c_lag_2",
+    "soil_temperature_c_lag_3",
+    "air_temperature_c_change_10min",
+    "air_temperature_c_change_20min",
+    "air_temperature_c_change_30min",
+    "relative_humidity_pct_change_10min",
+    "relative_humidity_pct_change_20min",
+    "relative_humidity_pct_change_30min",
+    "light_intensity_lux_change_10min",
+    "light_intensity_lux_change_20min",
+    "light_intensity_lux_change_30min",
+    "soil_temperature_c_change_10min",
+    "soil_temperature_c_change_20min",
+    "soil_temperature_c_change_30min",
+    "air_temperature_c_rolling_mean",
+    "air_temperature_c_rolling_std",
+    "relative_humidity_pct_rolling_mean",
+    "relative_humidity_pct_rolling_std",
+    "light_intensity_lux_rolling_mean",
+    "light_intensity_lux_rolling_std",
+    "soil_temperature_c_rolling_mean",
+    "soil_temperature_c_rolling_std",
+    "hour",
+    "cyclic_hour_sin",
+    "cyclic_hour_cos",
+    "growth_stage_Flowering",
+    "growth_stage_Fruiting",
+    "growth_stage_Harvesting",
+    "growth_stage_Seedling",
+    "growth_stage_Vegetative"
+  ],
+  "targets": {
+    "30": {
+      "risk_level": "risk_level_30m",
+      "risk_score": "risk_score_30m",
+      "stress_type": "stress_type_30m"
+    },
+    "60": {
+      "risk_level": "risk_level_60m",
+      "risk_score": "risk_score_60m",
+      "stress_type": "stress_type_60m"
+    }
+  },
+  "dataset_version": "model_training_table.csv (developer package, synthetic/derived labels)",
+  "metrics": {
+    "30min_stress_type_dummy_majority": {
+      "classification_report": {
+        "Cold Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "Combined Environmental Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "Heat Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 11.0
+        },
+        "High Humidity Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 58.0
+        },
+        "High Light Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "Low Humidity Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "Low Light Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 55.0
+        },
+        "No Significant Environmental Stress": {
+          "precision": 0.8366164542294322,
+          "recall": 1.0,
+          "f1-score": 0.9110410094637224,
+          "support": 722.0
+        },
+        "Root-Zone Heat Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "accuracy": 0.8366164542294322,
+        "macro avg": {
+          "precision": 0.09295738380327025,
+          "recall": 0.1111111111111111,
+          "f1-score": 0.10122677882930248,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.6999270914874276,
+          "recall": 0.8366164542294322,
+          "f1-score": 0.762191898995142,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          11,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          58,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          55,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          722,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ]
+      ]
+    },
+    "30min_stress_type_logistic_regression": {
+      "classification_report": {
+        "Cold Stress": {
+          "precision": 0.011730205278592375,
+          "recall": 1.0,
+          "f1-score": 0.02318840579710145,
+          "support": 4.0
+        },
+        "Combined Environmental Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "Heat Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 11.0
+        },
+        "High Humidity Stress": {
+          "precision": 0.13157894736842105,
+          "recall": 0.25862068965517243,
+          "f1-score": 0.1744186046511628,
+          "support": 58.0
+        },
+        "High Light Stress": {
+          "precision": 0.023255813953488372,
+          "recall": 1.0,
+          "f1-score": 0.045454545454545456,
+          "support": 2.0
+        },
+        "Low Humidity Stress": {
+          "precision": 0.01694915254237288,
+          "recall": 0.2,
+          "f1-score": 0.03125,
+          "support": 5.0
+        },
+        "Low Light Stress": {
+          "precision": 0.23170731707317074,
+          "recall": 0.34545454545454546,
+          "f1-score": 0.2773722627737226,
+          "support": 55.0
+        },
+        "No Significant Environmental Stress": {
+          "precision": 0.989247311827957,
+          "recall": 0.12742382271468145,
+          "f1-score": 0.22576687116564417,
+          "support": 722.0
+        },
+        "Root-Zone Heat Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "accuracy": 0.1541135573580533,
+        "macro avg": {
+          "precision": 0.15605208311600027,
+          "recall": 0.32572211753604435,
+          "f1-score": 0.08638340998246405,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.8514371016661773,
+          "recall": 0.1541135573580533,
+          "f1-score": 0.21867363524683056,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          40,
+          0,
+          0,
+          15,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          33,
+          0,
+          0,
+          2,
+          0,
+          0,
+          19,
+          1,
+          0
+        ],
+        [
+          261,
+          5,
+          19,
+          97,
+          72,
+          52,
+          60,
+          92,
+          64
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "30min_stress_type_random_forest": {
+      "classification_report": {
+        "Cold Stress": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1-score": 0.75,
+          "support": 4.0
+        },
+        "Combined Environmental Stress": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "Heat Stress": {
+          "precision": 0.1375,
+          "recall": 1.0,
+          "f1-score": 0.24175824175824176,
+          "support": 11.0
+        },
+        "High Humidity Stress": {
+          "precision": 0.29878048780487804,
+          "recall": 0.8448275862068966,
+          "f1-score": 0.44144144144144143,
+          "support": 58.0
+        },
+        "High Light Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "Low Humidity Stress": {
+          "precision": 0.375,
+          "recall": 0.6,
+          "f1-score": 0.46153846153846156,
+          "support": 5.0
+        },
+        "Low Light Stress": {
+          "precision": 0.5869565217391305,
+          "recall": 0.9818181818181818,
+          "f1-score": 0.7346938775510204,
+          "support": 55.0
+        },
+        "No Significant Environmental Stress": {
+          "precision": 0.987603305785124,
+          "recall": 0.6620498614958449,
+          "f1-score": 0.7927031509121062,
+          "support": 722.0
+        },
+        "Root-Zone Heat Stress": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "accuracy": 0.6987253765932793,
+        "macro avg": {
+          "precision": 0.4780563313328666,
+          "recall": 0.7228180329097323,
+          "f1-score": 0.5283853896149561,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.8951899927754282,
+          "recall": 0.6987253765932793,
+          "f1-score": 0.7535463207352068,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          3,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          49,
+          0,
+          0,
+          2,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          54,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          64,
+          115,
+          22,
+          5,
+          36,
+          478,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    "30min_risk_level_dummy_majority": {
+      "classification_report": {
+        "High": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 20.0
+        },
+        "Low": {
+          "precision": 0.936268829663963,
+          "recall": 1.0,
+          "f1-score": 0.9670855774985039,
+          "support": 808.0
+        },
+        "Moderate": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 35.0
+        },
+        "accuracy": 0.936268829663963,
+        "macro avg": {
+          "precision": 0.3120896098879877,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.32236185916616794,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.8765993214003268,
+          "recall": 0.936268829663963,
+          "f1-score": 0.9054520818294219,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          20,
+          0
+        ],
+        [
+          0,
+          808,
+          0
+        ],
+        [
+          0,
+          35,
+          0
+        ]
+      ]
+    },
+    "30min_risk_level_logistic_regression": {
+      "classification_report": {
+        "High": {
+          "precision": 0.05956112852664577,
+          "recall": 0.95,
+          "f1-score": 0.11209439528023599,
+          "support": 20.0
+        },
+        "Low": {
+          "precision": 0.9970674486803519,
+          "recall": 0.4207920792079208,
+          "f1-score": 0.5918189730200174,
+          "support": 808.0
+        },
+        "Moderate": {
+          "precision": 0.07389162561576355,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.12605042016806722,
+          "support": 35.0
+        },
+        "accuracy": 0.43337195828505215,
+        "macro avg": {
+          "precision": 0.3768400676075871,
+          "recall": 0.5997878359264498,
+          "f1-score": 0.2766545961561069,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.9379002641956071,
+          "recall": 0.43337195828505215,
+          "f1-score": 0.5618115675685529,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          19,
+          0,
+          1
+        ],
+        [
+          281,
+          340,
+          187
+        ],
+        [
+          19,
+          1,
+          15
+        ]
+      ]
+    },
+    "30min_risk_level_random_forest": {
+      "classification_report": {
+        "High": {
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1-score": 0.9473684210526315,
+          "support": 20.0
+        },
+        "Low": {
+          "precision": 0.998719590268886,
+          "recall": 0.9653465346534653,
+          "f1-score": 0.9817495280050346,
+          "support": 808.0
+        },
+        "Moderate": {
+          "precision": 0.53125,
+          "recall": 0.9714285714285714,
+          "f1-score": 0.6868686868686869,
+          "support": 35.0
+        },
+        "accuracy": 0.9640787949015064,
+        "macro avg": {
+          "precision": 0.8433231967562954,
+          "recall": 0.9455917020273455,
+          "f1-score": 0.8719955453087843,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.9797904738554575,
+          "recall": 0.9640787949015064,
+          "f1-score": 0.9689935006831107,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          18,
+          0,
+          2
+        ],
+        [
+          0,
+          780,
+          28
+        ],
+        [
+          0,
+          1,
+          34
+        ]
+      ]
+    },
+    "30min_risk_score_dummy_mean": {
+      "mean_absolute_error": 13.861327313671048
+    },
+    "30min_risk_score_random_forest": {
+      "mean_absolute_error": 4.485374662031671
+    },
+    "60min_stress_type_dummy_majority": {
+      "classification_report": {
+        "Cold Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "Combined Environmental Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "Heat Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 11.0
+        },
+        "High Humidity Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 59.0
+        },
+        "High Light Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "Low Humidity Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "Low Light Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 55.0
+        },
+        "No Significant Environmental Stress": {
+          "precision": 0.8354577056778679,
+          "recall": 1.0,
+          "f1-score": 0.9103535353535354,
+          "support": 721.0
+        },
+        "Root-Zone Heat Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "accuracy": 0.8354577056778679,
+        "macro avg": {
+          "precision": 0.09282863396420754,
+          "recall": 0.1111111111111111,
+          "f1-score": 0.10115039281705948,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.6979895779765269,
+          "recall": 0.8354577056778679,
+          "f1-score": 0.7605618760022004,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          11,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          59,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          55,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          721,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ]
+      ]
+    },
+    "60min_stress_type_logistic_regression": {
+      "classification_report": {
+        "Cold Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "Combined Environmental Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "Heat Stress": {
+          "precision": 0.06666666666666667,
+          "recall": 0.18181818181818182,
+          "f1-score": 0.0975609756097561,
+          "support": 11.0
+        },
+        "High Humidity Stress": {
+          "precision": 0.14634146341463414,
+          "recall": 0.3050847457627119,
+          "f1-score": 0.1978021978021978,
+          "support": 59.0
+        },
+        "High Light Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "Low Humidity Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "Low Light Stress": {
+          "precision": 0.23076923076923078,
+          "recall": 0.32727272727272727,
+          "f1-score": 0.2706766917293233,
+          "support": 55.0
+        },
+        "No Significant Environmental Stress": {
+          "precision": 0.9886363636363636,
+          "recall": 0.12066574202496533,
+          "f1-score": 0.21508034610630408,
+          "support": 721.0
+        },
+        "Root-Zone Cold Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "Root-Zone Heat Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "accuracy": 0.14484356894553882,
+        "macro avg": {
+          "precision": 0.14324137244868954,
+          "recall": 0.09348413968785863,
+          "f1-score": 0.07811202112475812,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.8515256147727958,
+          "recall": 0.14484356894553882,
+          "f1-score": 0.21170758747369062,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          7,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0,
+          18,
+          0,
+          0,
+          2,
+          0,
+          27,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          18,
+          1,
+          34,
+          0
+        ],
+        [
+          99,
+          9,
+          27,
+          103,
+          85,
+          27,
+          58,
+          87,
+          162,
+          64
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "60min_stress_type_random_forest": {
+      "classification_report": {
+        "Cold Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "Combined Environmental Stress": {
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5714285714285714,
+          "support": 3.0
+        },
+        "Heat Stress": {
+          "precision": 0.10416666666666667,
+          "recall": 0.9090909090909091,
+          "f1-score": 0.18691588785046728,
+          "support": 11.0
+        },
+        "High Humidity Stress": {
+          "precision": 0.3057324840764331,
+          "recall": 0.8135593220338984,
+          "f1-score": 0.4444444444444444,
+          "support": 59.0
+        },
+        "High Light Stress": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "Low Humidity Stress": {
+          "precision": 0.3333333333333333,
+          "recall": 0.4,
+          "f1-score": 0.36363636363636365,
+          "support": 5.0
+        },
+        "Low Light Stress": {
+          "precision": 0.5851063829787234,
+          "recall": 1.0,
+          "f1-score": 0.738255033557047,
+          "support": 55.0
+        },
+        "No Significant Environmental Stress": {
+          "precision": 0.975051975051975,
+          "recall": 0.6504854368932039,
+          "f1-score": 0.7803660565723793,
+          "support": 721.0
+        },
+        "Root-Zone Heat Stress": {
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4,
+          "support": 3.0
+        },
+        "accuracy": 0.6801853997682503,
+        "macro avg": {
+          "precision": 0.3670434269007924,
+          "recall": 0.5303484075575569,
+          "f1-score": 0.38722737305436367,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.8795411838201778,
+          "recall": 0.6801853997682503,
+          "f1-score": 0.7372638680826976,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          48,
+          0,
+          0,
+          2,
+          9,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          55,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          80,
+          109,
+          22,
+          4,
+          36,
+          469,
+          1
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    "60min_risk_level_dummy_majority": {
+      "classification_report": {
+        "High": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 20.0
+        },
+        "Low": {
+          "precision": 0.936268829663963,
+          "recall": 1.0,
+          "f1-score": 0.9670855774985039,
+          "support": 808.0
+        },
+        "Moderate": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 35.0
+        },
+        "accuracy": 0.936268829663963,
+        "macro avg": {
+          "precision": 0.3120896098879877,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.32236185916616794,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.8765993214003268,
+          "recall": 0.936268829663963,
+          "f1-score": 0.9054520818294219,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          20,
+          0
+        ],
+        [
+          0,
+          808,
+          0
+        ],
+        [
+          0,
+          35,
+          0
+        ]
+      ]
+    },
+    "60min_risk_level_logistic_regression": {
+      "classification_report": {
+        "High": {
+          "precision": 0.0581039755351682,
+          "recall": 0.95,
+          "f1-score": 0.10951008645533142,
+          "support": 20.0
+        },
+        "Low": {
+          "precision": 1.0,
+          "recall": 0.4146039603960396,
+          "f1-score": 0.5861767279090113,
+          "support": 808.0
+        },
+        "Moderate": {
+          "precision": 0.0845771144278607,
+          "recall": 0.4857142857142857,
+          "f1-score": 0.1440677966101695,
+          "support": 35.0
+        },
+        "accuracy": 0.4298957126303592,
+        "macro avg": {
+          "precision": 0.380893696654343,
+          "recall": 0.6167727487034418,
+          "f1-score": 0.2799182036581707,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.9410455139231501,
+          "recall": 0.4298957126303592,
+          "f1-score": 0.5571997343695756,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          19,
+          0,
+          1
+        ],
+        [
+          290,
+          335,
+          183
+        ],
+        [
+          18,
+          0,
+          17
+        ]
+      ]
+    },
+    "60min_risk_level_random_forest": {
+      "classification_report": {
+        "High": {
+          "precision": 0.9473684210526315,
+          "recall": 0.9,
+          "f1-score": 0.9230769230769231,
+          "support": 20.0
+        },
+        "Low": {
+          "precision": 0.9961190168175937,
+          "recall": 0.9529702970297029,
+          "f1-score": 0.9740670461733081,
+          "support": 808.0
+        },
+        "Moderate": {
+          "precision": 0.4507042253521127,
+          "recall": 0.9142857142857143,
+          "f1-score": 0.6037735849056604,
+          "support": 35.0
+        },
+        "accuracy": 0.9501738122827347,
+        "macro avg": {
+          "precision": 0.7980638877407792,
+          "recall": 0.9224186704384724,
+          "f1-score": 0.8336391847186305,
+          "support": 863.0
+        },
+        "weighted avg": {
+          "precision": 0.9728692721865495,
+          "recall": 0.9501738122827347,
+          "f1-score": 0.9578676561312509,
+          "support": 863.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          18,
+          0,
+          2
+        ],
+        [
+          1,
+          770,
+          37
+        ],
+        [
+          0,
+          3,
+          32
+        ]
+      ]
+    },
+    "60min_risk_score_dummy_mean": {
+      "mean_absolute_error": 13.857874772306486
+    },
+    "60min_risk_score_random_forest": {
+      "mean_absolute_error": 5.093771340285823
+    }
+  },
+  "model_type": "RandomForest/XGBoost classifiers (stress_type, risk_level) + regressors (risk_score) per horizon"
+}

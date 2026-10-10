@@ -1,0 +1,19 @@
+{
+  "model_version": "rgb-bellpepper-stress-v1",
+  "training_date": "2026-09-26",
+  "training_mode": "two_stage_cascade",
+  "flat_class_names": [
+    "Healthy"
+  ],
+  "stage2_class_names": [
+    "Aphid",
+    "Nutrient_Deficiency",
+    "Thrips"
+  ],
+  "image_size": [
+    256,
+    256
+  ],
+  "backbone": "efficientnetb0",
+  "notes": "Water_Deficit and Heat Stress may be absent from flat_class_names if those folders had zero images at training time - see dataset_all/RGB_Model_Training_Plan_and_Dataset_Analysis.txt Section 2 before reporting results against the originally planned class list."
+}
