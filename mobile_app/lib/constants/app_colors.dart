@@ -24,4 +24,6 @@ class AppColors {
 
   static const Color fieldBorder = Color(0xFFE0E5E0);
   static const Color error = Color(0xFFC62828);
+
+  static const Color navInactive = Color(0xFF9AA39C);
 }

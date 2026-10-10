@@ -6,6 +6,7 @@ import 'package:bell_pepper_app/constants/app_text_styles.dart';
 import 'package:bell_pepper_app/features/auth/ui/register_screen.dart';
 import 'package:bell_pepper_app/features/home/ui/home_screen.dart';
 import 'package:bell_pepper_app/services/auth_service.dart';
+import 'package:bell_pepper_app/services/credential_store.dart';
 import 'package:bell_pepper_app/ui/widgets/app_text_field.dart';
 import 'package:bell_pepper_app/ui/widgets/brand_header.dart';
 import 'package:bell_pepper_app/ui/widgets/glow_circle.dart';
@@ -23,10 +24,28 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _authService = AuthService();
+  final _credentialStore = CredentialStore();
 
   bool _isSigningIn = false;
+  bool _rememberMe = false;
 
   bool get _isBusy => _isSigningIn;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRememberedCredentials();
+  }
+
+  Future<void> _loadRememberedCredentials() async {
+    final saved = await _credentialStore.read();
+    if (saved == null || !mounted) return;
+    setState(() {
+      _emailController.text = saved.email;
+      _passwordController.text = saved.password;
+      _rememberMe = true;
+    });
+  }
 
   @override
   void dispose() {
@@ -65,6 +84,14 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text,
         password: _passwordController.text,
       );
+      if (_rememberMe) {
+        await _credentialStore.save(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        );
+      } else {
+        await _credentialStore.clear();
+      }
       _goToHome();
     } on FirebaseAuthException catch (e) {
       _showError(e.message ?? 'Could not sign in. Please try again.');
@@ -163,22 +190,68 @@ class _LoginScreenState extends State<LoginScreen> {
                                     validator: _validatePassword,
                                     prefixIcon: Icons.lock_outline,
                                   ),
-                                  const SizedBox(height: 10),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(
-                                      // TODO: navigate to password reset once that flow exists.
-                                      onPressed: _isBusy ? null : () {},
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        minimumSize: const Size(0, 0),
-                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        borderRadius: BorderRadius.circular(8),
+                                        onTap: _isBusy
+                                            ? null
+                                            : () => setState(
+                                                () => _rememberMe = !_rememberMe,
+                                              ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 4,
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SizedBox(
+                                                width: 20,
+                                                height: 20,
+                                                child: Checkbox(
+                                                  value: _rememberMe,
+                                                  onChanged: _isBusy
+                                                      ? null
+                                                      : (value) => setState(
+                                                          () => _rememberMe =
+                                                              value ?? false,
+                                                        ),
+                                                  activeColor: AppColors.primaryGreen,
+                                                  materialTapTargetSize:
+                                                      MaterialTapTargetSize.shrinkWrap,
+                                                  visualDensity: VisualDensity.compact,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(4),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              const Text(
+                                                AppStrings.rememberMe,
+                                                style: AppTextStyles.loginPrompt,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      child: const Text(
-                                        AppStrings.forgotPassword,
-                                        style: AppTextStyles.linkLabel,
+                                      TextButton(
+                                        // TODO: navigate to password reset once that flow exists.
+                                        onPressed: _isBusy ? null : () {},
+                                        style: TextButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          minimumSize: const Size(0, 0),
+                                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                        ),
+                                        child: const Text(
+                                          AppStrings.forgotPassword,
+                                          style: AppTextStyles.linkLabel,
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                   const SizedBox(height: 22),
                                   PrimaryButton(

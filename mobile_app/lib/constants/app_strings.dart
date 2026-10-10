@@ -24,6 +24,7 @@ class AppStrings {
   static const String passwordLabel = 'Password';
   static const String passwordHint = '••••••••';
   static const String forgotPassword = 'Forgot password?';
+  static const String rememberMe = 'Remember me';
   static const String logIn = 'Log In';
   static const String or = 'or';
   static const String continueAsDemoUser = 'Continue as Demo User';

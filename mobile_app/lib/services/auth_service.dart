@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bell_pepper_app/services/credential_store.dart';
 
 /// Thin wrapper around [FirebaseAuth] so screens depend on this instead of
 /// the Firebase SDK directly.
 class AuthService {
-  AuthService({FirebaseAuth? firebaseAuth})
-    : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  AuthService({FirebaseAuth? firebaseAuth, CredentialStore? credentialStore})
+    : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+      _credentialStore = credentialStore ?? CredentialStore();
 
   final FirebaseAuth _firebaseAuth;
+  final CredentialStore _credentialStore;
 
   User? get currentUser => _firebaseAuth.currentUser;
 
@@ -41,5 +44,8 @@ class AuthService {
     return _firebaseAuth.signInAnonymously();
   }
 
-  Future<void> signOut() => _firebaseAuth.signOut();
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+    await _credentialStore.clear();
+  }
 }
