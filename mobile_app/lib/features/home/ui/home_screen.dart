@@ -3,6 +3,7 @@ import 'package:bell_pepper_app/constants/app_colors.dart';
 import 'package:bell_pepper_app/constants/app_text_styles.dart';
 import 'package:bell_pepper_app/features/auth/ui/login_screen.dart';
 import 'package:bell_pepper_app/services/auth_service.dart';
+import 'package:bell_pepper_app/services/user_repository.dart';
 
 /// Placeholder landing screen after sign-in. Real dashboard content (the
 /// RGB/thermal/environmental/recovery features) lands here incrementally.
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = AuthService().currentUser;
-    final label = user?.isAnonymous == true
+    final fallbackLabel = user?.isAnonymous == true
         ? 'Demo User'
         : (user?.email ?? 'grower');
 
@@ -38,7 +39,19 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text('Signed in as $label', style: AppTextStyles.screenTitle),
+        child: user == null || user.isAnonymous
+            ? Text('Signed in as $fallbackLabel', style: AppTextStyles.screenTitle)
+            : FutureBuilder(
+                future: UserRepository().getUserProfile(user.uid),
+                builder: (context, snapshot) {
+                  final name = snapshot.data?.fullName;
+                  final label = (name == null || name.isEmpty) ? fallbackLabel : name;
+                  return Text(
+                    'Welcome, $label',
+                    style: AppTextStyles.screenTitle,
+                  );
+                },
+              ),
       ),
     );
   }

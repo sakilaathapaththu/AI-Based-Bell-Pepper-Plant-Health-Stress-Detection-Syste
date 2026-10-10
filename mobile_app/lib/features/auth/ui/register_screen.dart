@@ -4,7 +4,9 @@ import 'package:bell_pepper_app/constants/app_colors.dart';
 import 'package:bell_pepper_app/constants/app_strings.dart';
 import 'package:bell_pepper_app/constants/app_text_styles.dart';
 import 'package:bell_pepper_app/features/home/ui/home_screen.dart';
+import 'package:bell_pepper_app/models/user_profile.dart';
 import 'package:bell_pepper_app/services/auth_service.dart';
+import 'package:bell_pepper_app/services/user_repository.dart';
 import 'package:bell_pepper_app/ui/widgets/app_text_field.dart';
 import 'package:bell_pepper_app/ui/widgets/brand_header.dart';
 import 'package:bell_pepper_app/ui/widgets/glow_circle.dart';
@@ -24,6 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _authService = AuthService();
+  final _userRepository = UserRepository();
 
   bool _isRegistering = false;
 
@@ -55,15 +58,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isRegistering = true);
+    final fullName = _fullNameController.text.trim();
+    final email = _emailController.text.trim();
+    UserCredential? credential;
     try {
-      await _authService.registerWithEmail(
-        fullName: _fullNameController.text,
-        email: _emailController.text,
+      credential = await _authService.registerWithEmail(
+        fullName: fullName,
+        email: email,
         password: _passwordController.text,
       );
+      try {
+        await _userRepository.createUserProfile(
+          UserProfile(uid: credential.user!.uid, fullName: fullName, email: email),
+        );
+      } catch (_) {
+        // Firestore write failed after the auth account was created — roll
+        // back so we don't leave an auth user with no profile behind.
+        await credential.user?.delete();
+        rethrow;
+      }
       _goToHome();
     } on FirebaseAuthException catch (e) {
       _showError(e.message ?? 'Could not create your account. Please try again.');
+    } catch (_) {
+      _showError('Could not save your profile. Please try again.');
     } finally {
       if (mounted) setState(() => _isRegistering = false);
     }
