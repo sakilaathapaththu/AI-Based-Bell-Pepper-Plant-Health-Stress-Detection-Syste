@@ -18,7 +18,7 @@ const List<DashboardModule> dashboardModules = [
     description: 'Identify physiological stress from thermal images.',
     icon: Icons.thermostat_outlined,
     accentColor: Color(0xFFE2762C),
-    status: ModuleStatus.comingSoon,
+    status: ModuleStatus.implemented,
     imageAsset: AppAssets.thermalStressIcon,
   ),
   DashboardModule(

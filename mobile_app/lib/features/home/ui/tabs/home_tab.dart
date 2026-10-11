@@ -5,6 +5,7 @@ import 'package:bell_pepper_app/features/environmental_stress/ui/environmental_s
 import 'package:bell_pepper_app/features/home/models/dashboard_module.dart';
 import 'package:bell_pepper_app/features/home/models/dashboard_modules_data.dart';
 import 'package:bell_pepper_app/features/home/ui/widgets/module_card.dart';
+import 'package:bell_pepper_app/features/thermal_stress/ui/thermal_stress_flow.dart';
 import 'package:bell_pepper_app/services/auth_service.dart';
 import 'package:bell_pepper_app/services/user_repository.dart';
 import 'package:bell_pepper_app/ui/widgets/glow_circle.dart';
@@ -34,8 +35,20 @@ class _HomeTabState extends State<HomeTab> {
     setState(() => _openModule = module);
   }
 
+  Widget _buildModuleScreen(DashboardModule module) {
+    void onBack() => setState(() => _openModule = null);
+    switch (module.title) {
+      case 'Thermal Stress Detection':
+        return ThermalStressFlow(onBack: onBack);
+      case 'Environmental Stress Prediction':
+      default:
+        return EnvironmentalStressScreen(onBack: onBack);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final openModule = _openModule;
     return Stack(
       children: [
         Positioned(
@@ -51,11 +64,9 @@ class _HomeTabState extends State<HomeTab> {
         ),
         SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(4, 8, 4, 24),
-          child: _openModule == null
+          child: openModule == null
               ? _DashboardView(onModuleTap: (module) => _handleModuleTap(context, module))
-              : EnvironmentalStressScreen(
-                  onBack: () => setState(() => _openModule = null),
-                ),
+              : _buildModuleScreen(openModule),
         ),
       ],
     );
