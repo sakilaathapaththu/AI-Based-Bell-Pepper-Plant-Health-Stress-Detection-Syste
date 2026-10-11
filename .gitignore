@@ -2,6 +2,8 @@ agent.md
 docs/agent.md
 docs/*.md
 
+.DS_Store
+
 __pycache__/
 *.pyc
 **/.env
