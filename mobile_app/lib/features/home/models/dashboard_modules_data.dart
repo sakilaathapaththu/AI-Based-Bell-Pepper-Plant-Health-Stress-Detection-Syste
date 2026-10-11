@@ -10,7 +10,7 @@ const List<DashboardModule> dashboardModules = [
     description: 'Detect visible plant stress using RGB images.',
     icon: Icons.camera_alt_outlined,
     accentColor: Color(0xFF2F8F6B),
-    status: ModuleStatus.comingSoon,
+    status: ModuleStatus.implemented,
     imageAsset: AppAssets.rgbStressIcon,
   ),
   DashboardModule(
