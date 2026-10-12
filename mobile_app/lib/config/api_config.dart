@@ -7,7 +7,7 @@
 class ApiConfig {
   const ApiConfig._();
 
-  static const String baseUrl = 'https://87ac-112-135-187-217.ngrok-free.app';
+  static const String baseUrl = 'https://ff72-2402-d000-8110-555b-e9fa-55d7-656d-b165.ngrok-free.app';
 
   static const String health = '/health';
 

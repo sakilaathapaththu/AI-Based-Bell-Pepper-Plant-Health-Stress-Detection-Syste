@@ -14,7 +14,13 @@ class RgbResult {
     this.imageUrl,
     this.sentToRecovery = false,
     this.createdAt,
+    this.id,
   });
+
+  /// Firestore document id (`users/{uid}/rgb_results/{id}`) - null when this
+  /// instance wasn't built from a Firestore query (e.g. fromApiResponse,
+  /// before the doc is saved).
+  final String? id;
 
   final String timestamp;
   final String plantCondition;
@@ -68,7 +74,7 @@ class RgbResult {
     );
   }
 
-  factory RgbResult.fromMap(Map<String, dynamic> map) {
+  factory RgbResult.fromMap(Map<String, dynamic> map, {String? id}) {
     final timestamp = map['createdAt'];
     return RgbResult(
       timestamp: map['timestamp'] as String? ?? '',
@@ -80,6 +86,7 @@ class RgbResult {
       imageUrl: map['imageUrl'] as String?,
       sentToRecovery: map['sentToRecovery'] as bool? ?? false,
       createdAt: timestamp is Timestamp ? timestamp.toDate() : null,
+      id: id,
     );
   }
 }

@@ -20,14 +20,33 @@ class RgbRepository {
 
   Future<List<RgbResult>> getResults(String uid) async {
     final snapshot = await _results(uid).orderBy('createdAt', descending: true).get();
-    return snapshot.docs.map((doc) => RgbResult.fromMap(doc.data())).toList();
+    return snapshot.docs.map((doc) => RgbResult.fromMap(doc.data(), id: doc.id)).toList();
   }
 
   Future<RgbResult?> getLatestResult(String uid) async {
-    final snapshot = await _results(
-      uid,
-    ).orderBy('createdAt', descending: true).limit(1).get();
+    // Force a server round-trip rather than the local cache: a result saved
+    // moments ago may still have `createdAt` written via
+    // FieldValue.serverTimestamp(), which only resolves once Firestore
+    // confirms the write server-side. Reading from cache before that
+    // happens can return a doc with a null/missing createdAt (sorted behind
+    // older, already-resolved docs), which then gets excluded by the
+    // date-matching logic as "not today" even though it really is today's
+    // scan.
+    final snapshot = await _results(uid)
+        .orderBy('createdAt', descending: true)
+        .limit(1)
+        .get(const GetOptions(source: Source.server));
     if (snapshot.docs.isEmpty) return null;
-    return RgbResult.fromMap(snapshot.docs.first.data());
+    return RgbResult.fromMap(snapshot.docs.first.data(), id: snapshot.docs.first.id);
+  }
+
+  /// Marks a saved result as forwarded to Adaptive Recovery. Called right
+  /// after a recovery plan is successfully generated using this doc as one
+  /// of its inputs.
+  Future<void> markSentToRecovery(String uid, String id) {
+    return _results(uid).doc(id).update({
+      'sentToRecovery': true,
+      'sentToRecoveryAt': FieldValue.serverTimestamp(),
+    });
   }
 }

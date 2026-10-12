@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bell_pepper_app/constants/app_colors.dart';
 import 'package:bell_pepper_app/constants/app_text_styles.dart';
+import 'package:bell_pepper_app/features/adaptive_recovery/ui/adaptive_recovery_flow.dart';
 import 'package:bell_pepper_app/features/environmental_stress/ui/environmental_stress_screen.dart';
 import 'package:bell_pepper_app/features/home/models/dashboard_module.dart';
 import 'package:bell_pepper_app/features/home/models/dashboard_modules_data.dart';
@@ -43,6 +44,8 @@ class _HomeTabState extends State<HomeTab> {
         return RgbStressFlow(onBack: onBack);
       case 'Thermal Stress Detection':
         return ThermalStressFlow(onBack: onBack);
+      case 'Adaptive Recovery Plan':
+        return AdaptiveRecoveryFlow(onBack: onBack);
       case 'Environmental Stress Prediction':
       default:
         return EnvironmentalStressScreen(onBack: onBack);

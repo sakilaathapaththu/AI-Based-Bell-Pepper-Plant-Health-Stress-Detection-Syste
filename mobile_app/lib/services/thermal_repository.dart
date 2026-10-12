@@ -20,6 +20,28 @@ class ThermalRepository {
 
   Future<List<ThermalResult>> getResults(String uid) async {
     final snapshot = await _results(uid).orderBy('createdAt', descending: true).get();
-    return snapshot.docs.map((doc) => ThermalResult.fromMap(doc.data())).toList();
+    return snapshot.docs.map((doc) => ThermalResult.fromMap(doc.data(), id: doc.id)).toList();
+  }
+
+  Future<ThermalResult?> getLatestResult(String uid) async {
+    // See RgbRepository.getLatestResult for why this reads from the server
+    // rather than the local cache (avoids a pending-serverTimestamp race
+    // that can hide or misorder a just-saved result).
+    final snapshot = await _results(uid)
+        .orderBy('createdAt', descending: true)
+        .limit(1)
+        .get(const GetOptions(source: Source.server));
+    if (snapshot.docs.isEmpty) return null;
+    return ThermalResult.fromMap(snapshot.docs.first.data(), id: snapshot.docs.first.id);
+  }
+
+  /// Marks a saved result as forwarded to Adaptive Recovery. Called right
+  /// after a recovery plan is successfully generated using this doc as one
+  /// of its inputs.
+  Future<void> markSentToRecovery(String uid, String id) {
+    return _results(uid).doc(id).update({
+      'sentToRecovery': true,
+      'sentToRecoveryAt': FieldValue.serverTimestamp(),
+    });
   }
 }

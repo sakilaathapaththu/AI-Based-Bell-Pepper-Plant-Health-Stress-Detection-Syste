@@ -25,7 +25,12 @@ class StressPrediction {
     required this.recoveryHandoff,
     this.sentToRecovery = false,
     this.createdAt,
+    this.id,
   });
+
+  /// Firestore document id (`users/{uid}/stress_predictions/{id}`) - null
+  /// when this instance wasn't built from a Firestore query.
+  final String? id;
 
   final String predictionTimestamp;
   final String growthStage;
@@ -55,7 +60,7 @@ class StressPrediction {
     };
   }
 
-  factory StressPrediction.fromMap(Map<String, dynamic> map) {
+  factory StressPrediction.fromMap(Map<String, dynamic> map, {String? id}) {
     final timestamp = map['createdAt'];
     return StressPrediction(
       predictionTimestamp: map['predictionTimestamp'] as String? ?? '',
@@ -75,6 +80,7 @@ class StressPrediction {
       ),
       sentToRecovery: map['sentToRecovery'] as bool? ?? false,
       createdAt: timestamp is Timestamp ? timestamp.toDate() : null,
+      id: id,
     );
   }
 

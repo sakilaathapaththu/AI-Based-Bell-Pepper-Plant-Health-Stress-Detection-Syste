@@ -33,7 +33,7 @@ const List<DashboardModule> dashboardModules = [
     description: 'Generate recovery guidance from combined component outputs.',
     icon: Icons.healing_outlined,
     accentColor: Color(0xFF3568C7),
-    status: ModuleStatus.comingSoon,
+    status: ModuleStatus.implemented,
     imageAsset: AppAssets.recoveryPlanIcon,
   ),
 ];

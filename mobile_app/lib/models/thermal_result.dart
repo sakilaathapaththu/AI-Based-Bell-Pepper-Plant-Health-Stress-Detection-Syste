@@ -16,7 +16,12 @@ class ThermalResult {
     this.imageUrl,
     this.sentToRecovery = false,
     this.createdAt,
+    this.id,
   });
+
+  /// Firestore document id (`users/{uid}/thermal_results/{id}`) - null when
+  /// this instance wasn't built from a Firestore query.
+  final String? id;
 
   final String timestamp;
   final String stressStatus;
@@ -75,7 +80,7 @@ class ThermalResult {
     );
   }
 
-  factory ThermalResult.fromMap(Map<String, dynamic> map) {
+  factory ThermalResult.fromMap(Map<String, dynamic> map, {String? id}) {
     final timestamp = map['createdAt'];
     return ThermalResult(
       timestamp: map['timestamp'] as String? ?? '',
@@ -89,6 +94,7 @@ class ThermalResult {
       imageUrl: map['imageUrl'] as String?,
       sentToRecovery: map['sentToRecovery'] as bool? ?? false,
       createdAt: timestamp is Timestamp ? timestamp.toDate() : null,
+      id: id,
     );
   }
 }
